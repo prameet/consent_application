@@ -1,0 +1,236 @@
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'consent_form/style/css/consent_form_style.css' %}">
+{% endblock %}
+{% block main_content %}
+<div class="content_section">
+
+    <!-- sidebar -->
+    <div class="col-12 col-lg-2 aside_sidebar">
+        <div class="list-group w-100">
+            <button type="button" class="button btn submit icon_button w_100 w-100">
+                Consent form
+                <span class="btn_label">
+                    <i class="fas fa-file"></i>
+                </span>
+            </button>
+        </div>
+    </div>
+
+    <div class="col-12 col-lg-10 ">
+        <div class="dashboard_section_header">
+
+            <div class="titile_box">
+                <div id="alert-container" class="position-fixed">
+                    <!-- Alerts will be dynamically added here -->
+
+                </div>
+                <h2 class="title">
+                    Consent form home
+                </h2>
+            </div>
+            <!-- help section -->
+            <div class="help_button_box">
+                <button type="button" data-bs-toggle="modal" data-bs-target="#new_consent_form_request_modal"
+                        class="btn button icon_button w_100 ">New Consent Request
+                    <span class="btn_label">
+                       <i class="fas fa-plus"></i>
+                    </span>
+                </button>
+
+            </div>
+        </div>
+        <div class="dashboard_services_box">
+
+            {% for form in consent_forms %}
+
+
+            <!-- If there is something, they will see the content in this box. -->
+            <div class="available_services col-xl-12">
+                <div class="available_head col-12">
+                    <div class="head_data col-12">
+
+                        <div class="user col-md-6">
+
+
+                            <img src="{% static 'consent_form/images/user avatar/default.svg' %}" alt="user avatar"
+                                 class="user_avatar_consent img-fluid" loading="lazy" width="40" height="40">
+
+
+                            <div class="text d-flex flex-column">
+
+                                <span class=" myServices_title ">
+                                    <strong>Service Requester:</strong> {{ form.user }}
+                                </span>
+                                <span class=" myServices_title">
+                                    <strong>logged user:</strong> {{ form.user }}
+                                </span>
+                                <span class=" myServices_title">
+                                    <strong>Service Code:</strong> {{ form.service_code }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="date col-md-6 ">
+                        <span class="service_date status bg-accepted">
+                            {{ form.uploaded_at }}
+                        </span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="job_available_Conditions my-2">
+
+                    <p class="box_paragraph">
+                        {{ form.comments }}
+                    </p>
+                </div>
+                <!--  Accepted -->
+                <hr class="short w-100">
+                <div class="job_button col-xl-12 justify-content-end">
+
+                    {% if form.consent_pdf %}
+                    <a href="{% url 'consent_form:download_file' consent_form_id=form.id %}"
+                       class="btn button icon_button w_100">Download</a>
+                    {% else %}
+                    No File
+                    {% endif %}
+
+                    <button role="button" class="btn button rounded icon_button w_100 delete-btn"
+                            data-bs-target="#consent_remove_alert_modal"
+                            data-id="{{ form.id }}"
+                            data-bs-toggle="modal">
+                        Remove
+                        <span class="btn_label btn_primary">
+                                   <i class="fas fa-trash"></i>
+                                </span>
+                    </button>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+            <!-- If there is nothing, they will see this box -->
+            <div class="col-xl-12">
+
+                <div class="alert alert-primary" role="alert">
+                    <h4 class="alert-heading">Sorry!</h4>
+                    <p>You have not added any service provider requests yet, so there are no services to display. </p>
+                    <hr>
+                    <p class="mb-0">If you want to add a service provider request, click on New Consent Form.</p>
+                </div>
+            </div>
+
+            {% endfor %}
+
+
+        </div>
+
+        <!-- remove Consent Modal start -->
+        <div class="modal fade " id="consent_remove_alert_modal"
+             data-bs-backdrop="static"
+             data-bs-keyboard="false" tabindex="-1" aria-labelledby="#consent_remove_alert_modal"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger text-white">
+                        <h2 class="modal__title">Confirm Deletion</h2>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <p>
+                            Are you sure you want to delete this item? This action cannot be undone.
+                        </p>
+                        <input type="hidden" id="consentFormId" name="consentFormId">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn button weekly_event_form_save_btn w_100 icon_button"
+                                id="confirmDelete">
+                            <span class="button_text">Continue</span>
+                            <span class="btn_label">
+                                <i class="fas fa-save"></i>
+                            </span>
+                        </button>
+                        <button type="button"
+                                class="btn button rounded consent_form_close_modal_btn w_100 icon_button"
+                                data-bs-dismiss="modal">
+                            Cancel
+                            <span class="btn_label btn_primary">
+                                <i class="fas fa-times"></i>
+                            </span>
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- remove Consent Modal start -->
+
+        <!-- new request consent form modal content start -->
+        {% include 'consent_form/consent_endorsed_request_form.html' %}
+        <!-- new request consent form modal content end -->
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+{#    وقتی این دو فعال بودند در صفحه به دلیل تکرار دو بک دراپ مدل کامل بسته نمیشد#}
+
+<script src="{% static 'consent_form/js/jquery.min.js' %}"></script>
+
+<script src="{% static 'consent_form/js/bootstrap.bundle.min.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'consent_form/js/signing.js' %}"></script>
+<script src="{% static 'consent_form/js/consent.js' %}"></script>
+
+<script>
+
+$(".delete-btn").click(function () {
+            var consentFormId = $(this).data("id");  // Get the ID from the clicked button
+            $("#consentFormId").val(consentFormId);  // Set it in the hidden input
+    });
+    $("#confirmDelete").click(function () {
+        var consentFormId = $("#consentFormId").val();  // Get the ID from the modal input
+
+        $.ajax({
+//            url: "{% url 'consent_form:delete_consent' 9999 %}".replace("9999", consentFormId),
+            url: "/consent_form/delete/" + consentFormId + "/",
+            type: "POST",
+            data: {
+                csrfmiddlewaretoken: "{{ csrf_token }}"
+            },
+            success: function (response) {
+                $('#consent_remove_alert_modal').modal('hide');  // Hide modal
+
+                $('.modal-backdrop').remove();  // Remove the remaining overlay
+                $('body').removeClass('modal-open');  // Restore body scroll
+
+                // Show success alert
+                showAlert("Consent form deleted successfully!", "success");
+
+                // Remove the deleted row from table (if applicable)
+                $("#row-" + consentFormId).fadeOut();
+
+                // Optional: Reload the page after 1 seconds
+                setTimeout(function () {
+                    location.reload();
+                }, 2000);
+            },
+            error: function (xhr) {
+                showAlert("Error deleting consent form. Please try again.", "danger");
+            }
+        });
+    });
+
+
+</script>
+
+
+{% endblock %}

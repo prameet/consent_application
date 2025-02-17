@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load consent_form_tags %}
+
+{% block content %}
+<div class="container-fluid py-3">
+
+    {% consent_form_tag request service_id service service_access consent_forms %}
+</div>
+{% endblock %}

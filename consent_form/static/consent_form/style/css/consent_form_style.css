@@ -1,0 +1,164 @@
+@import "base.css";
+
+.dashboard_services_box .available_services {
+    margin: 10px 0;
+}
+
+.dashboard_services_box {
+    padding: 1rem 0.75rem;
+    border-radius: .5rem;
+    background-color: var(--light);
+    margin-top: 5px;
+    border: 0.05rem solid hsl(162.19deg 91.43% 27.45% / 25%);
+    /* height: 100dvh; */
+}
+
+.dashboard_services_box .available_services .job_button {
+    display: flex;
+    column-gap: 10px;
+    row-gap: 10px;
+
+}
+
+.dashboard_services_box .available_services {
+    position: relative;
+    border-radius: .5rem;
+    margin: 0.75rem 0;
+    border: 0.05rem solid rgba(153 246 228 / 1);
+    padding: 1.25rem;
+    background-color: rgba(240 253 250 / 1);
+    z-index: inherit;
+}
+
+.dashboard_services_box .available_services .available_head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.dashboard_services_box .available_services .available_head .head_data {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dashboard_services_box .available_services .available_head .head_data .user {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.user_avatar_consent {
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    overflow: hidden;
+    color: transparent;
+    object-fit: cover;
+    /* border: 0.05rem solid var(--blue); */
+}
+
+.dashboard_services_box .available_services .available_head .head_data .user .myServices_title,
+.dashboard_services_box .available_services .available_head .head_data .date .service_date {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.dashboard_services_box .available_services .available_head .head_data .date {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+    column-gap: 10px;
+}
+
+
+.consent_form_request_box,
+.check_box_items,
+.declaration_statement,
+.service_agreement_evidence,
+.signing_document {
+    display: -webkit-flex;
+    display: flex;
+    justify-content: flex-start;
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 0.25rem;
+    border: 0.05rem solid hsl(162.19deg 91.43% 27.45% / 30%);
+    margin: .5rem 0;
+}
+
+.check_box_items,
+.declaration_statement,
+.service_agreement_evidence, .signing_document {
+    flex-direction: column;
+}
+
+.box_paragraph {
+    line-height: 1.6;
+    margin-top: 5px;
+    color: #252525;
+    letter-spacing: -0.03rem;
+    /* text-transform: capitalize; */
+    font-size: .95rem;
+    font-weight: 500;
+    white-space: normal;
+}
+
+.dashboard .dashboard_services_box .available_services .job_button {
+    display: flex;
+    column-gap: 10px;
+    row-gap: 10px;
+    /* justify-content: flex-start; */
+    /* align-items: center; */
+}
+
+.short {
+    margin: 5px 0 20px 0;
+}
+
+.label {
+    font-weight: 600;
+    color: #212529;
+    font-size: 0.9rem;
+}
+
+label {
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: #212529;
+    font-size: 0.85rem;
+}
+
+#signatureCanvas {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    height: 200px;
+    display: block;
+    cursor: url('../../images/icon/pen.png') 16 16, crosshair;
+}
+
+@media screen and (max-width: 1025px) {
+
+}
+
+@media only screen and (max-width: 992px) {
+
+}
+
+@media screen and (max-width: 640px) {
+    .dashboard_services_box .available_services .job_button {
+        flex-direction: column;
+    }
+
+    .dashboard_services_box .available_services .available_head .head_data {
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+
+    .dashboard_services_box .available_services .available_head .head_data .user {
+        margin-bottom: 15px;
+    }
+}

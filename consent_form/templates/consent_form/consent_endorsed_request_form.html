@@ -1,0 +1,431 @@
+{% load static %}
+<div class="modal fade new_consent_request_modal" id="new_consent_form_request_modal"
+     data-bs-backdrop="static"
+     data-bs-keyboard="false" tabindex="-1" aria-labelledby="new_consent_form_request_modal"
+     aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="title fs-5">Provider Request</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!--  text information -->
+                <div class="form-group text_information">
+
+                    <p class="box_paragraph">
+                        dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                        standard
+                        dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
+                        it to make a type specimen book. It has survived not only five centuries, but also the leap
+                        into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s
+                        with the release of Letraset sheets containing Lorem Ipsum passages, and more recently
+                        with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    </p>
+                    <p class="box_paragraph">
+                        There are many variations of passages of Lorem Ipsum available, but the majority have suffered
+                        alteration in some form, by injected humour, or randomised words which don't look even slightly
+                        believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't
+                        anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the
+                        Internet tend to repeat predefined chunks as necessary, making this the first true generator
+                        on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of
+                        model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated
+                        Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic
+                        words etc.
+                    </p>
+
+                </div>
+
+                <form class="consent_form_request row g-1" id="consent-form" autocomplete="off">
+                    {% csrf_token %}
+                    <div class="col-lg-12 row g-2 consent_form_request_box">
+                        <div class="d-flex flex-column g-1">
+                            <h3 class="title">
+                                Application
+                            </h3>
+                        </div>
+                        <hr class="short my-2">
+                        <!-- Provider Legal Name  -->
+                        <div class="form-group col-md-6 col-lg-6 col-xl-4">
+
+
+                            <label for="application" class="label">Application Type<span
+                                    class="text-danger">*</span></label>
+                            <select class="form-select" id="application" onchange="return generateServiceCode()"
+                                    name="application" required>
+                                <option selected value="">Choose...</option>
+                                <option value="Coordinator">Coordinator</option>
+                                <option value="Planner">Planner</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a valid application.
+                            </div>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-6 col-xl-4">
+                            <label class="label" for="consent_form_provider_trading_name_input"> Service Code
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" id="service_code" name="service_code" class="form-control"
+                                   placeholder="Generated Service Code" readonly>
+
+                        </div>
+                    </div>
+                    <!--  Provider Information Collection Form -->
+                    <div class="col-lg-12 row g-2 consent_form_request_box">
+                        <div class="d-flex flex-column g-1">
+                            <h3 class="title">
+                                Provider Information Collection Form
+                            </h3>
+                        </div>
+                        <hr class="short my-2">
+                        <!-- Provider Legal Name  -->
+                        <div class="form-group col-md-6 col-lg-6 col-xl-4">
+                            <label class="label" for="consent_form_provider_legal_name_input"> Provider Legal Name
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" name="provider_legal_name" placeholder="Provider Legal Name"
+                                   class="form-control" id="consent_form_provider_legal_name_input"
+                                   value="" data-input-name="Firstname" data-name-validation="firstname" required>
+                            <span class="help-text"></span>
+                        </div>
+                        <!-- Provider Trading Name   -->
+                        <div class="form-group col-md-6 col-lg-6 col-xl-4">
+                            <label class="label" for="consent_form_provider_trading_name_input"> Provider Trading Name
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" name="provider_trading_name" placeholder="Provider Trading Name"
+                                   class="form-control" id="consent_form_provider_trading_name_input"
+                                   value="" data-input-name="Firstname" data-name-validation="firstname" required>
+                            <span class="help-text"></span>
+                        </div>
+                        <!-- Provider Number  -->
+                        <div class="form-group col-md-6 col-lg-6 col-xl-4">
+                            <label class="label" for="consent_service_provider_number_input"> Provider Number
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" name="provider_number"
+                                   placeholder="Provider Number" class="form-control"
+                                   id="consent_service_provider_number_input" value=""
+                                   data-input-name="Service provider name" data-name-validation="firstname" required>
+                            <span class="help-text"></span>
+                        </div>
+                        <!-- Provider ABN   -->
+                        <div class="form-group col-md-6 col-lg-6 col-xl-4">
+                            <label class="label" for="consent_service_provider_abn_number_input"> Provider ABN
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" name="provider_abn"
+                                   placeholder="Provider ABN" class="form-control"
+                                   id="consent_service_provider_abn_number_input" value=""
+                                   data-input-name="Service provider name" data-name-validation="firstname" required>
+                            <span class="help-text"></span>
+                        </div>
+                        <!-- Participants Full Name   -->
+                        <div class="form-group col-md-6 col-lg-6 col-xl-4">
+                            <label class="label" for="consent_form_participants_full_name_input"> Participants Full Name
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" name="participant_full_name" placeholder="Participants Full Name"
+                                   class="form-control" id="consent_form_participants_full_name_input"
+                                   value="" data-input-name="Firstname" data-name-validation="firstname" required>
+                            <span class="help-text"></span>
+                        </div>
+
+                        <!-- NDIS Number -->
+                        <div class="form-group col-md-6 col-lg-6 col-xl-4">
+                            <label class="label" for="consent_service_provider_ndis_number_input"> NDIS Number
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" name="ndis_number"
+                                   placeholder="NDIS Number " class="form-control"
+                                   id="consent_service_provider_ndis_number_input" value=""
+                                   data-input-name="Service provider name" data-name-validation="firstname" required>
+                            <span class="help-text"></span>
+                        </div>
+
+                    </div>
+                    <!--  Form checkbox Items -->
+                    <div class="check_box_items">
+                        <div class="d-flex flex-column g-1">
+                            <span class="label">
+                                Categories of Service(s) - Please indicate the types of services your organisation is to
+                                offer NDIS participants. Select all applicable categories and provide additional details
+                                as necessary to ensure a clear understanding of the services.
+                                <span class="text-danger">*</span>
+                            </span>
+                        </div>
+                        <hr class="short my-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="coreSupport" name="services[]"
+                                   id="coreSupport" >
+                            <label class="form-check-label" for="coreSupport">
+                                Core Support - Daily Personal Activities: Assistance with daily tasks in a group or
+                                individually.
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="communityParticipation"
+                                   id="communityParticipation" name="services[]">
+                            <label class="form-check-label" for="communityParticipation">
+                                Community and Social Participation: Supports to engage in social, community, and
+                                recreational activities.
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="consumablesAssistive"
+                                   id="consumablesAssistive" name="services[]">
+                            <label class="form-check-label" for="consumablesAssistive">
+                                Consumables and Low Cost AT Assistive: Provision of devices and technology to aid
+                                daily living and improve independence.
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="transportServices"
+                                   id="transportServices" name="services[]">
+                            <label class="form-check-label" for="transportServices">
+                                Transport Services: Assistance with transportation to support participation in
+                                community, social, and daily activities.
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="supportCoordination"
+                                   id="supportCoordination" name="services[]">
+                            <label class="form-check-label" for="supportCoordination">
+                                Support Coordination
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="livingArrangements"
+                                   id="livingArrangements" name="services[]">
+                            <label class="form-check-label" for="livingArrangements">
+                                Improved Living Arrangements: CB Home Living
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="socialCommunity" id="socialCommunity"
+                                   name="services[]">
+                            <label class="form-check-label" for="socialCommunity">
+                                Increased Social & Community Participation: CB Social Community and Civic
+                                Participation
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="jobSupport" id="jobSupport"
+                                   name="services[]">
+                            <label class="form-check-label" for="jobSupport">
+                                Finding & Keeping a Job: CB Employment
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="relationships" id="relationships"
+                                   name="services[]">
+                            <label class="form-check-label" for="relationships">
+                                Improved Relationships: CB Relationships (PBS)
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="healthWellbeing" id="healthWellbeing"
+                                   name="services[]">
+                            <label class="form-check-label" for="healthWellbeing">
+                                Improved Health & Wellbeing: CB Health and Wellbeing
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="learning" id="learning"
+                                   name="services[]">
+                            <label class="form-check-label" for="learning">
+                                Improved Learning: CB Lifelong Learning
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="lifeChoices" id="lifeChoices"
+                                   name="services[]">
+                            <label class="form-check-label" for="lifeChoices">
+                                Improved Life Choices: CB Choice and Control
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="dailyLiving" id="dailyLiving"
+                                   name="services[]">
+                            <label class="form-check-label" for="dailyLiving">
+                                Improved Daily Living: CB Daily Activity
+                            </label>
+                        </div>
+
+                        <!-- Other Option -->
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="otherOption" id="otherOption"
+                                   name="services[]"
+                                   onclick="toggleOtherInput()">
+                            <label class="form-check-label" for="otherOption">
+                                Other (Please specify)
+                            </label>
+                        </div>
+                        <input type="text" class="form-control mt-2 d-none" id="otherInput" name="otherInput"
+                               placeholder="Enter other service...">
+
+                        <div class="text-danger mt-2 d-none" id="checkboxError">Please select at least one option.</div>
+                    </div>
+                    <!--  Form Comments -->
+                    <div class="form_comment">
+                        <div class="form-group col-12 textarea_element">
+                            <label class="label" for="consent_form_provider_comment_input">
+                                Comments
+                                <span class="text-danger">*</span><br>
+                            </label>
+                            <textarea placeholder="Comments" name="comments"
+                                      class="form-control header_text_area add_header"
+                                      cols="30" rows="6" data-input-name="Message Box"
+                                      data-name-validation="messageTextarea"
+                                      id="consent_form_provider_comment_input"
+                                      data-name-function="enquiry messageBox" required></textarea>
+                            <span class="help-text"></span>
+
+                            <div class="feedback_counter">
+                                <span class="help-text"></span>
+                                <div class="characters">
+                                    <span class="word_count">0 word </span>
+                                    <span class="feedback_length">| 0 characters</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--  Form Declaration Statement Items -->
+                    <div class="declaration_statement">
+                        <div class="d-flex flex-column g-1">
+                            <span class="label">
+                                Declaration Statement: I/We confirm that: Discussions have taken place with the
+                                participant, OR participant's nominee(s) AND/OR guardian(s) regarding our services.
+                                A valid service agreement, aligning with the participant's NDIS plan, has been mutually
+                                agreed upon and signed.This declaration affirms our commitment to providing services in
+                                accordance with NDIS standards and the agreed terms.
+                                <span class="text-danger">*</span>
+                            </span>
+                        </div>
+                        <hr class="short my-2">
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="declaration[]"
+                                   id="declaration_statement_true" required>
+                            <label class="form-check-label" for="declaration_statement_true">
+                                True
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="declaration[]"
+                                   id="declaration_statement_false"
+                                   checked>
+                            <label class="form-check-label" for="declaration_statement_false">
+                                False
+                            </label>
+                        </div>
+
+
+                    </div>
+                    <!--  Service agreement or other evidence  -->
+                    <div class="service_agreement_evidence ">
+                        <div class="d-flex flex-column g-1">
+                            <span class="label">
+                                Service agreement or other evidence
+                            </span>
+                        </div>
+                        <hr class="short my-2">
+                        <div class="form-group col-12 ">
+                            <label class="label d-flex align-items-center flex-wrap gx-2"
+                                   for="service_agreement_evidence_upload_input"> Optional field
+                                <span class="optional_text">
+                                          ( Example file input (PDF, DOC/DOCX) and File Size Must Be Less Than 2 Megabytes)
+                                    </span>
+                            </label>
+                            <input class="form-control" type="file" name="service_agreement_evidence_upload_input"
+                                   id="service_agreement_evidence_upload_input"
+                                   placeholder="" data-input-name="" data-name-validation="firstname">
+                            <span class="help-text"></span>
+                        </div>
+                    </div>
+                    <!--  signing this document -->
+                    <div class="signing_document">
+                        <div class="d-flex flex-column g-1">
+                            <span class="label">Name of person signing this document</span>
+                        </div>
+                        <hr class="short my-2">
+
+                        <div class="row g-2">
+                            <!-- First Name -->
+                            <div class="form-group col-md-6">
+                                <label class="label" for="consent_form_signing_document_first_name_input">Signing
+                                    Document First Name <span class="text-danger">*</span></label>
+                                <input type="text" placeholder="First Name" class="form-control"
+                                       name="signing_first_name" id="consent_form_signing_document_first_name_input" required>
+                                <span class="help-text"></span>
+                            </div>
+                            <!-- Last Name -->
+                            <div class="form-group col-md-6">
+                                <label class="label" for="consent_form_signing_document_last_name_input">Signing
+                                    Document Last Name <span class="text-danger">*</span></label>
+                                <input type="text" placeholder="Last Name" class="form-control"
+                                       name="signing_last_name" id="consent_form_signing_document_last_name_input" required>
+                                <span class="help-text"></span>
+                            </div>
+                        </div>
+
+                        <!-- Signature Canvas -->
+                        <div class="form-group col-12 signature-container">
+                            <p>Please sign below:</p>
+                            <canvas id="signatureCanvas"></canvas>
+                            <div class="buttons d-flex justify-content-end mt-3">
+                                <button type="button" class="btn btn-outline-secondary" id="clearButton">Clear</button>
+                            </div>
+                        </div>
+
+                        <!-- Hidden Input to Store Signature -->
+                        <input type="hidden" name="signature" id="signatureInput">
+                    </div>
+
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="submit"
+                        class="btn button dashboard_btn_submit consent_form_submit_btn icon_button w_100">
+                    <span class="button_text">Submit</span>
+                    <span class="loading_text hidden_text">Loading...</span>
+                    <span class="spinner-border hidden_text" role="status"></span>
+                    <span class="btn_label">
+                                                        <i class="fas fa-angle-double-up"></i>
+                                                    </span>
+                </button>
+                <button type="button"
+                        class="btn button rounded consent_form_close_modal_btn icon_button w_100"
+                        data-bs-dismiss="modal">
+                    Close
+                    <span class="btn_label btn_primary">
+                                                        <i class="fas fa-times"></i>
+                                                    </span>
+                </button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+

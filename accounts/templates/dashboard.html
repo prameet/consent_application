@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h2>Welcome, {{ user.username }}!</h2>
+    <p>You are logged in as <strong>{{ user.get_username }}</strong>.</p>
+
+</div>
+
+{% endblock %}
