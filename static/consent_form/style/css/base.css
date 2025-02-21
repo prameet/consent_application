@@ -375,3 +375,8 @@ label i {
 .nav-link{
     color:#fff;
 }
+.is-invalid-checkbox{
+    
+    border-color: red!important;
+    color:#252525!important;
+}

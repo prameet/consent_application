@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load consent_form_tags %}
+
+{% block content %}
+<div class="container-fluid py-3">
+    <h1>Oops! File Not Found 😢</h1>
+    <p>The file <strong>{{ filename }}</strong> is missing.</p>
+    <p>Please check the file name or contact support.</p>
+    <a href="{% url 'consent_form:consent_form_home' %}" class="btn btn-outline-info mt-2">Go back</a>
+</div>
+{% endblock %}

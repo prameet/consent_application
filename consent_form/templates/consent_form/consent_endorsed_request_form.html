@@ -37,7 +37,7 @@
 
                 </div>
 
-                <form class="consent_form_request row g-1" id="consent-form" autocomplete="off">
+                <form class="consent_form_request row g-1 was-validated" id="consent-form" autocomplete="off">
                     {% csrf_token %}
                     <div class="col-lg-12 row g-2 consent_form_request_box">
                         <div class="d-flex flex-column g-1">
@@ -61,16 +61,17 @@
                             <div class="invalid-feedback">
                                 Please select a valid application.
                             </div>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
+                            
                         </div>
                         <div class="form-group col-md-6 col-lg-6 col-xl-4">
                             <label class="label" for="consent_form_provider_trading_name_input"> Service Code
                                 <span class="text-danger">*</span>
                             </label>
-                            <input type="text" id="service_code" name="service_code" class="form-control"
-                                   placeholder="Generated Service Code" readonly>
+                            <input required type="text" id="service_code" name="service_code" class="form-control"
+                                   placeholder="Generated Service Code" readonly data-input-name="service_code" data-name-validation="service_code">
+                            <div class="invalid-feedback">
+                                Will generate automatically.
+                            </div>
 
                         </div>
                     </div>
@@ -89,8 +90,12 @@
                             </label>
                             <input type="text" name="provider_legal_name" placeholder="Provider Legal Name"
                                    class="form-control" id="consent_form_provider_legal_name_input"
-                                   value="" data-input-name="Firstname" data-name-validation="firstname" required>
+                                   value="" data-input-name="provider_legal_name" data-name-validation="provider_legal_name" required>
                             <span class="help-text"></span>
+                            <div class="invalid-feedback">
+                                Please enter provider legal name.
+                            </div>
+                            
                         </div>
                         <!-- Provider Trading Name   -->
                         <div class="form-group col-md-6 col-lg-6 col-xl-4">
@@ -101,6 +106,9 @@
                                    class="form-control" id="consent_form_provider_trading_name_input"
                                    value="" data-input-name="Firstname" data-name-validation="firstname" required>
                             <span class="help-text"></span>
+                            <div class="invalid-feedback">
+                                Please enter provider trading name.
+                            </div>
                         </div>
                         <!-- Provider Number  -->
                         <div class="form-group col-md-6 col-lg-6 col-xl-4">
@@ -112,6 +120,9 @@
                                    id="consent_service_provider_number_input" value=""
                                    data-input-name="Service provider name" data-name-validation="firstname" required>
                             <span class="help-text"></span>
+                            <div class="invalid-feedback">
+                                Please enter provider number.
+                            </div>
                         </div>
                         <!-- Provider ABN   -->
                         <div class="form-group col-md-6 col-lg-6 col-xl-4">
@@ -123,6 +134,9 @@
                                    id="consent_service_provider_abn_number_input" value=""
                                    data-input-name="Service provider name" data-name-validation="firstname" required>
                             <span class="help-text"></span>
+                            <div class="invalid-feedback">
+                                Please enter provider ABN.
+                            </div>
                         </div>
                         <!-- Participants Full Name   -->
                         <div class="form-group col-md-6 col-lg-6 col-xl-4">
@@ -133,6 +147,9 @@
                                    class="form-control" id="consent_form_participants_full_name_input"
                                    value="" data-input-name="Firstname" data-name-validation="firstname" required>
                             <span class="help-text"></span>
+                            <div class="invalid-feedback">
+                                Please enter participants full name.
+                            </div>
                         </div>
 
                         <!-- NDIS Number -->
@@ -145,6 +162,9 @@
                                    id="consent_service_provider_ndis_number_input" value=""
                                    data-input-name="Service provider name" data-name-validation="firstname" required>
                             <span class="help-text"></span>
+                            <div class="invalid-feedback">
+                                Please enter NDIS Number.
+                            </div>
                         </div>
 
                     </div>
@@ -160,7 +180,7 @@
                         </div>
                         <hr class="short my-2">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="coreSupport" name="services[]"
+                            <input class="form-check-input is-invalid-checkbox"  type="checkbox" value="coreSupport" name="services[]"
                                    id="coreSupport" >
                             <label class="form-check-label" for="coreSupport">
                                 Core Support - Daily Personal Activities: Assistance with daily tasks in a group or
@@ -169,7 +189,7 @@
                         </div>
 
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="communityParticipation"
+                            <input class="form-check-input is-invalid-checkbox"  type="checkbox" value="communityParticipation"
                                    id="communityParticipation" name="services[]">
                             <label class="form-check-label" for="communityParticipation">
                                 Community and Social Participation: Supports to engage in social, community, and
@@ -178,7 +198,7 @@
                         </div>
 
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="consumablesAssistive"
+                            <input class="form-check-input is-invalid-checkbox"  type="checkbox" value="consumablesAssistive"
                                    id="consumablesAssistive" name="services[]">
                             <label class="form-check-label" for="consumablesAssistive">
                                 Consumables and Low Cost AT Assistive: Provision of devices and technology to aid
@@ -187,7 +207,7 @@
                         </div>
 
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="transportServices"
+                            <input class="form-check-input is-invalid-checkbox"  type="checkbox" value="transportServices"
                                    id="transportServices" name="services[]">
                             <label class="form-check-label" for="transportServices">
                                 Transport Services: Assistance with transportation to support participation in
@@ -196,7 +216,7 @@
                         </div>
 
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="supportCoordination"
+                            <input class="form-check-input is-invalid-checkbox"  type="checkbox" value="supportCoordination"
                                    id="supportCoordination" name="services[]">
                             <label class="form-check-label" for="supportCoordination">
                                 Support Coordination
@@ -204,7 +224,7 @@
                         </div>
 
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="livingArrangements"
+                            <input class="form-check-input is-invalid-checkbox"  type="checkbox" value="livingArrangements"
                                    id="livingArrangements" name="services[]">
                             <label class="form-check-label" for="livingArrangements">
                                 Improved Living Arrangements: CB Home Living
@@ -212,7 +232,7 @@
                         </div>
 
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="socialCommunity" id="socialCommunity"
+                            <input class="form-check-input is-invalid-checkbox"  type="checkbox" value="socialCommunity" id="socialCommunity"
                                    name="services[]">
                             <label class="form-check-label" for="socialCommunity">
                                 Increased Social & Community Participation: CB Social Community and Civic
@@ -221,7 +241,7 @@
                         </div>
 
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="jobSupport" id="jobSupport"
+                            <input class="form-check-input is-invalid-checkbox"  type="checkbox" value="jobSupport" id="jobSupport"
                                    name="services[]">
                             <label class="form-check-label" for="jobSupport">
                                 Finding & Keeping a Job: CB Employment
@@ -229,7 +249,7 @@
                         </div>
 
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="relationships" id="relationships"
+                            <input class="form-check-input is-invalid-checkbox"  type="checkbox" value="relationships" id="relationships"
                                    name="services[]">
                             <label class="form-check-label" for="relationships">
                                 Improved Relationships: CB Relationships (PBS)
@@ -237,7 +257,7 @@
                         </div>
 
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="healthWellbeing" id="healthWellbeing"
+                            <input class="form-check-input is-invalid-checkbox"  type="checkbox" value="healthWellbeing" id="healthWellbeing"
                                    name="services[]">
                             <label class="form-check-label" for="healthWellbeing">
                                 Improved Health & Wellbeing: CB Health and Wellbeing
@@ -245,7 +265,7 @@
                         </div>
 
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="learning" id="learning"
+                            <input class="form-check-input is-invalid-checkbox"  type="checkbox" value="learning" id="learning"
                                    name="services[]">
                             <label class="form-check-label" for="learning">
                                 Improved Learning: CB Lifelong Learning
@@ -253,7 +273,7 @@
                         </div>
 
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="lifeChoices" id="lifeChoices"
+                            <input class="form-check-input is-invalid-checkbox"  type="checkbox" value="lifeChoices" id="lifeChoices"
                                    name="services[]">
                             <label class="form-check-label" for="lifeChoices">
                                 Improved Life Choices: CB Choice and Control
@@ -261,7 +281,7 @@
                         </div>
 
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="dailyLiving" id="dailyLiving"
+                            <input class="form-check-input is-invalid-checkbox"  type="checkbox" value="dailyLiving" id="dailyLiving"
                                    name="services[]">
                             <label class="form-check-label" for="dailyLiving">
                                 Improved Daily Living: CB Daily Activity
@@ -270,9 +290,9 @@
 
                         <!-- Other Option -->
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="otherOption" id="otherOption"
+                            <input class="form-check-input is-invalid-checkbox"  type="checkbox" value="otherOption" id="otherOption"
                                    name="services[]"
-                                   onclick="toggleOtherInput()">
+                                   onclick="toggleOtherInput()" >
                             <label class="form-check-label" for="otherOption">
                                 Other (Please specify)
                             </label>
@@ -280,7 +300,8 @@
                         <input type="text" class="form-control mt-2 d-none" id="otherInput" name="otherInput"
                                placeholder="Enter other service...">
 
-                        <div class="text-danger mt-2 d-none" id="checkboxError">Please select at least one option.</div>
+                        
+                        <div class="invalid-feedback d-block" id="checkboxError">Please select at least one option.</div>
                     </div>
                     <!--  Form Comments -->
                     <div class="form_comment">
@@ -296,6 +317,9 @@
                                       id="consent_form_provider_comment_input"
                                       data-name-function="enquiry messageBox" required></textarea>
                             <span class="help-text"></span>
+                            <div class="invalid-feedback">
+                                Please enter a comments.
+                            </div>
 
                             <div class="feedback_counter">
                                 <span class="help-text"></span>
@@ -305,6 +329,10 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="text-danger d-none" id="checkboxError">Please select at least one option.</div>
+
+                        <!-- Error for "Other" input field -->
+                        <div class="text-danger d-none" id="otherInputError"></div>
 
                     </div>
                     <!--  Form Declaration Statement Items -->
@@ -322,16 +350,16 @@
                         <hr class="short my-2">
 
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="declaration[]"
-                                   id="declaration_statement_true" required>
+                            <input class="form-check-input "  type="radio" name="declaration[]"
+                                   id="declaration_statement_true" required checked>
                             <label class="form-check-label" for="declaration_statement_true">
                                 True
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="declaration[]"
+                            <input class="form-check-input"  type="radio" name="declaration[]"
                                    id="declaration_statement_false"
-                                   checked>
+                                   >
                             <label class="form-check-label" for="declaration_statement_false">
                                 False
                             </label>
@@ -375,6 +403,9 @@
                                 <input type="text" placeholder="First Name" class="form-control"
                                        name="signing_first_name" id="consent_form_signing_document_first_name_input" required>
                                 <span class="help-text"></span>
+                                <div class="invalid-feedback">
+                                    Please enter signing first name.
+                                </div>
                             </div>
                             <!-- Last Name -->
                             <div class="form-group col-md-6">
@@ -383,6 +414,9 @@
                                 <input type="text" placeholder="Last Name" class="form-control"
                                        name="signing_last_name" id="consent_form_signing_document_last_name_input" required>
                                 <span class="help-text"></span>
+                                <div class="invalid-feedback">
+                                    Please enter signing last name.
+                                </div>
                             </div>
                         </div>
 
@@ -417,8 +451,8 @@
                         data-bs-dismiss="modal">
                     Close
                     <span class="btn_label btn_primary">
-                                                        <i class="fas fa-times"></i>
-                                                    </span>
+                        <i class="fas fa-times"></i>
+                    </span>
                 </button>
             </div>
             </form>
